@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from 'react-bootstrap/Button'
 
 const Nominations = ({ nominations, setNominations }) => {
   return (
@@ -9,12 +10,13 @@ const Nominations = ({ nominations, setNominations }) => {
           <li key={n.Id}>
             Title: {n.Title} <br />
             Year: {n.Year}
-            <button
+            <Button
+              variant='primary'
               onClick={() =>
                 setNominations(nominations.filter(nom => nom.Id !== n.Id))
               }>
               Remove Nomination
-            </button>
+            </Button>
           </li>
         ))}
       </ul>

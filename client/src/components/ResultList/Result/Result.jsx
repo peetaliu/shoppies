@@ -1,4 +1,6 @@
 import React from 'react'
+import Button from 'react-bootstrap/Button'
+import ListGroup from 'react-bootstrap/ListGroup'
 
 const Result = ({ movie, setNom, noms }) => {
   const addNom = () => {
@@ -8,20 +10,24 @@ const Result = ({ movie, setNom, noms }) => {
   const btn = () => {
     if (noms.length >= 5 || noms.find(n => n.Id === movie.Id)) {
       return (
-        <button onClick={addNom} disabled>
+        <Button variant='primary' onClick={addNom} disabled>
           Nominate
-        </button>
+        </Button>
       )
     } else {
-      return <button onClick={addNom}>Nominate</button>
+      return (
+        <Button variant='primary' onClick={addNom}>
+          Nominate
+        </Button>
+      )
     }
   }
   return (
-    <li>
+    <ListGroup.Item>
       Title: {movie.Title} <br />
       Year: {movie.Year}
       {btn()}
-    </li>
+    </ListGroup.Item>
   )
 }
 
