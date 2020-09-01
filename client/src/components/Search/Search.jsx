@@ -1,32 +1,37 @@
 import React, { useState, useEffect } from 'react'
 import omdbService from '../../services/omdbService'
 
-const Search = ({ setResults }) => {
+const Search = ({ setResults, setLoading }) => {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
+    setResults([])
+    if (search.trim()) {
+      setLoading(true)
+    } else {
+      setLoading(false)
+    }
     const getResults = async () => {
-      setResults([])
-      if (search.trim()) {
-        const result = await omdbService.search({ search: search.trim() })
-        if (result) {
-          if (result.Error) {
-            setResults({ Error: result.Error })
-          } else {
-            result.Search &&
-              setResults(
-                result.Search.map(m => ({
-                  Title: m.Title,
-                  Year: m.Year,
-                  Id: m.imdbID,
-                }))
-              )
-          }
+      const result = await omdbService.search({ search: search.trim() })
+      if (result && search.trim()) {
+        if (result.Error) {
+          setResults({ Error: result.Error })
+          setLoading(false)
+        } else {
+          result.Search &&
+            setResults(
+              result.Search.map(m => ({
+                Title: m.Title,
+                Year: m.Year,
+                Id: m.imdbID,
+              }))
+            )
+          setLoading(false)
         }
       }
     }
     getResults()
-  }, [search, setResults])
+  }, [search, setResults, setLoading])
 
   return (
     <div>
