@@ -8,10 +8,14 @@ const baseURL = config.OMDB_URL
 let cancelToken
 
 omdbRouter.post('/', async (req, res) => {
+  const body = req.body
   if (typeof cancelToken !== typeof undefined) {
+    if (body.search.length === 0) {
+      cancelToken.cancel()
+      res.status(204)
+    }
     cancelToken.cancel()
   }
-  const body = req.body
   cancelToken = axios.CancelToken.source()
   const options = {
     method: 'POST',
