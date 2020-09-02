@@ -25,9 +25,18 @@ omdbRouter.post('/', async (req, res) => {
   }
   try {
     const results = await axios(options)
-    res.json(results.data)
+    const data = results.data
+    if (data.Error) {
+      if (data.Error.includes('Too')) {
+        res.json({ Error: `${data.Error} Please refine your search term.` })
+      } else {
+        res.json({ Error: `${data.Error} Try a different search term.` })
+      }
+    } else {
+      res.json(data)
+    }
   } catch (error) {
-    res.send({ Cancel: true })
+    res.send(error)
   }
 })
 
