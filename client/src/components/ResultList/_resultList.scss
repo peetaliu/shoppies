@@ -1,4 +1,13 @@
 #resultList {
   background: white;
   padding: 2rem;
+  text-align: center;
+
+  .spinner {
+    align-self: center;
+  }
+}
+
+p {
+  font-size: $small-font-size;
 }
