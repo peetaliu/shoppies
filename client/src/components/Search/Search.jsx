@@ -10,7 +10,7 @@ const Search = ({ setResults, setLoading, search, setSearch }) => {
       const result = await omdbService.search({ search: search.trim() })
       if (result.Error) {
         if (search.trim()) {
-          setResults({ Error: result.Error })
+          setResults([result])
         } else {
           setResults([])
         }
@@ -24,13 +24,6 @@ const Search = ({ setResults, setLoading, search, setSearch }) => {
             }))
           )
       }
-
-      setLoading(false)
-    }
-    if (search.trim()) {
-      setLoading(true)
-    } else {
-      setLoading(false)
     }
     getResults()
   }, [search, setResults, setLoading])

@@ -9,12 +9,12 @@ const Results = ({ results, setNominations, nominations, loading, search }) => {
       {search ? `Results for "${search.trim()}"` : 'Results'}
       <ListGroup variant='flush'>
         {loading ? (
-          <Spinner animation='border' role='status'>
+          <Spinner animation='border' role='status' className='spinner'>
             <span className='sr-only'>Loading...</span>
           </Spinner>
         ) : null}
-        {results.Error ? (
-          <p>{results.Error}</p>
+        {results.filter(e => e.Error).length ? (
+          <p>{results[0].Error}</p>
         ) : (
           results.map(m => (
             <Result
