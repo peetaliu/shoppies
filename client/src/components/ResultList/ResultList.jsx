@@ -3,10 +3,10 @@ import Result from './Result/Result'
 import Spinner from 'react-bootstrap/Spinner'
 import ListGroup from 'react-bootstrap/ListGroup'
 
-const Results = ({ results, setNominations, nominations, loading }) => {
+const Results = ({ results, setNominations, nominations, loading, search }) => {
   return (
-    <div>
-      Results
+    <div id='resultList'>
+      {search ? `Results for "${search.trim()}"` : 'Results'}
       <ListGroup variant='flush'>
         {loading ? (
           <Spinner animation='border' role='status'>

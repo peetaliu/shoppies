@@ -10,22 +10,24 @@ const Result = ({ movie, setNom, noms }) => {
   const btn = () => {
     if (noms.length >= 5 || noms.find(n => n.Id === movie.Id)) {
       return (
-        <Button variant='primary' onClick={addNom} disabled>
+        <Button variant='primary' onClick={addNom} disabled className='nom-btn'>
           Nominate
         </Button>
       )
     } else {
       return (
-        <Button variant='primary' onClick={addNom}>
+        <Button variant='primary' onClick={addNom} className='nom-btn'>
           Nominate
         </Button>
       )
     }
   }
   return (
-    <ListGroup.Item>
-      Title: {movie.Title} <br />
-      Year: {movie.Year}
+    <ListGroup.Item id='result'>
+      <p className='info'>
+        Title: {movie.Title} <br />
+        Year: {movie.Year}
+      </p>
       {btn()}
     </ListGroup.Item>
   )

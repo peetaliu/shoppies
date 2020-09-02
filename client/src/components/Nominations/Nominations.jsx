@@ -1,13 +1,14 @@
 import React from 'react'
+import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 
 const Nominations = ({ nominations, setNominations }) => {
   return (
-    <div>
+    <div id='nominations'>
       Nominations
-      <ul>
+      <ListGroup variant='flush'>
         {nominations.map(n => (
-          <li key={n.Id}>
+          <ListGroup.Item key={n.Id}>
             Title: {n.Title} <br />
             Year: {n.Year}
             <Button
@@ -17,9 +18,9 @@ const Nominations = ({ nominations, setNominations }) => {
               }>
               Remove Nomination
             </Button>
-          </li>
+          </ListGroup.Item>
         ))}
-      </ul>
+      </ListGroup>
     </div>
   )
 }
