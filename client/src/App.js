@@ -5,9 +5,8 @@ import Nominations from './components/Nominations/Nominations'
 import Notification from './components/Notification/Notification'
 import { Container, Row, Col } from 'react-bootstrap'
 
-import './App.css'
-
 const App = () => {
+  const [search, setSearch] = useState('')
   const [results, setResults] = useState([])
   const [nominations, setNominations] = useState([])
   const [notif, setNotif] = useState(null)
@@ -15,24 +14,31 @@ const App = () => {
 
   useEffect(() => {
     if (nominations.length === 5) {
-      setNotif('5 noms')
-      setTimeout(() => {
-        setNotif(null)
-      }, 5000)
+      setNotif(
+        "Congrats! You've nominated 5 movies for a Shoppy award. You can save your list or remove an entry to continue nominating."
+      )
+    } else {
+      setNotif(null)
     }
   }, [nominations])
 
   return (
-    <Container>
+    <Container id='App'>
       <Notification message={notif} />
-      <h1>Shoppies</h1>
+      <h1>The Shoppies</h1>
       <Row>
-        <Search setResults={setResults} setLoading={setLoading} />
+        <Search
+          setResults={setResults}
+          setLoading={setLoading}
+          search={search}
+          setSearch={setSearch}
+        />
       </Row>
       <Row>
         <Col>
           <ResultList
             results={results}
+            search={search}
             setNominations={setNominations}
             nominations={nominations}
             loading={loading}
