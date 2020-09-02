@@ -1,0 +1,13 @@
+@import './base/mixins';
+@import './base/variables';
+@import './base/_typography.scss';
+@import './base/font-awesome.min.css';
+
+@import '../style/base/base';
+
+@import '../app';
+@import '../components/Nominations/nominations';
+@import '../components/Notification/notification';
+@import '../components/ResultList/resultList';
+@import '../components/ResultList/Result/result';
+@import '../components/Search/search';

@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&Quicksand&family=Source+Sans+Pro&family=Montserrat:ital,wght@0,400;0,700;1,400&family=Raleway&display=swap');
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+  font-weight: 700;
+  font-family: 'Raleway', sans-serif;
+}
+
+p,
+a {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: $default-font-size;
+}
+
+a,
+a:link,
+a:hover,
+a:visited,
+a:active {
+  text-decoration: none;
+}
+
+a:hover {
+  transition: all 0.3s ease-in-out;
+}
