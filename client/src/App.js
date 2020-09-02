@@ -23,7 +23,6 @@ const App = () => {
   }, [nominations])
 
   useEffect(() => {
-    console.log('search && results:', search, results)
     search.length && !results.length ? setLoading(true) : setLoading(false)
   }, [search, results])
 
