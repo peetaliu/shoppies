@@ -5,7 +5,18 @@ const search = async sObj => {
   try {
     const req = await axios.post(`${baseURL}`, sObj)
     return req.data
-  } catch (err) {}
+  } catch (err) {
+    console.log('Search error: ', err)
+  }
 }
 
-export default { search }
+const populate = async idsObj => {
+  try {
+    const req = await axios.post(`${baseURL}/populate`, idsObj)
+    return req.data
+  } catch (err) {
+    console.log('Populate Error: ', err)
+  }
+}
+
+export default { search, populate }
