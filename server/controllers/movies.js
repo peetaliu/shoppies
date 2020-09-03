@@ -18,7 +18,7 @@ omdbRouter.post('/', async (req, res) => {
   }
   cancelToken = axios.CancelToken.source()
   const options = {
-    method: 'POST',
+    method: 'GET',
     url: baseURL,
     params: { s: body.search, type: 'movie' },
     cancelToken: cancelToken.token,
@@ -38,6 +38,20 @@ omdbRouter.post('/', async (req, res) => {
   } catch (error) {
     res.send(error)
   }
+})
+
+omdbRouter.post('/populate', async (req, res) => {
+  const ids = req.body.ids
+  const resArr = await ids.map(async id => {
+    const options = {
+      method: 'GET',
+      url: baseURL,
+      params: { i: id },
+    }
+    const returnObj = await axios(options)
+    return returnObj.data
+  })
+  res.json(await Promise.all(resArr))
 })
 
 module.exports = omdbRouter
