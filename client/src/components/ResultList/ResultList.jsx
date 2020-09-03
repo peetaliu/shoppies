@@ -6,10 +6,14 @@ import ListGroup from 'react-bootstrap/ListGroup'
 const Results = ({ results, setNominations, nominations, loading, search }) => {
   return (
     <div id='resultList'>
-      {search ? `Results for "${search.trim()}"` : 'Results'}
+      <h4>{search ? `Results for "${search.trim()}"` : 'Results'}</h4>
       <ListGroup variant='flush'>
         {loading ? (
-          <Spinner animation='border' role='status' className='spinner'>
+          <Spinner
+            animation='border'
+            role='status'
+            variant='primary'
+            className='spinner'>
             <span className='sr-only'>Loading...</span>
           </Spinner>
         ) : null}
