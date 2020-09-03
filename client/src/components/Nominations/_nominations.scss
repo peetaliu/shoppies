@@ -1,4 +1,22 @@
 #nominations {
   background: white;
   padding: 2rem;
+
+  .nom-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      text-align: left;
+      font-size: 1em;
+      margin: 0;
+    }
+
+    button {
+      background-color: #de3618;
+      border-radius: 3px;
+      height: min-content;
+    }
+  }
 }
