@@ -6,33 +6,51 @@ import FormControl from 'react-bootstrap/FormControl'
 
 const Nominations = ({ nominations, setNominations }) => {
   const [saved, setSaved] = useState({})
-  const [listName, setListName] = useState()
+  const [listName, setListName] = useState('')
 
-  console.log('noms', nominations)
   useEffect(() => {
     if (localStorage.length) {
       setSaved({ ...localStorage })
     }
   }, [])
 
-  // console.log('saved: ', saved)
-  // console.log('saved parsed: ', Object.keys(saved))
+  const loadLists = () => {
+    const ll = Object.keys(localStorage).map(k => {
+      return { [k]: JSON.parse(localStorage.getItem(k)) }
+    })
+
+    return ll
+  }
+
+  const saveList = () => {
+    localStorage.setItem(listName, JSON.stringify(nominations))
+    setSaved({ ...localStorage })
+    setListName('')
+  }
 
   return (
     <div id='nominations'>
       <h4>Nominations</h4>
-      <label htmlFor='list-name'>
-        <p>List Name</p>
-      </label>
       <InputGroup className='mb-3'>
         <FormControl
           name='list'
           id='list-name'
           value={listName}
-          onChange={target => setListName(target.value)}
+          placeholder='List Name'
+          onChange={({ target }) => setListName(target.value)}
         />
         <InputGroup.Append>
-          <Button variant='primary'>Save List</Button>
+          {listName &&
+          nominations.length === 5 &&
+          !Object.keys(localStorage).includes(listName) ? (
+            <Button variant='primary' onClick={saveList}>
+              Save List
+            </Button>
+          ) : (
+            <Button variant='primary' disabled>
+              Save List
+            </Button>
+          )}
         </InputGroup.Append>
       </InputGroup>
       <ListGroup variant='flush'>
