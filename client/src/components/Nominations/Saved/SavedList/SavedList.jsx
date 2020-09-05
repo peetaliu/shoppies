@@ -2,15 +2,20 @@ import React, { useState } from 'react'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 
-const SavedList = ({ listName, listItems, handleDel }) => {
+const SavedList = ({ listName, listItems, loadLocalStorage }) => {
   const [show, setShow] = useState(false)
+
+  const delList = key => {
+    localStorage.removeItem(key)
+    loadLocalStorage()
+  }
 
   if (!show) {
     return (
       <ListGroup.Item className='saved-list' onClick={() => setShow(!show)}>
         <div className='saved-list__heading' onClick={() => setShow(!show)}>
           {listName}
-          <Button variant='danger' onClick={() => handleDel(listName)}>
+          <Button variant='danger' onClick={() => delList(listName)}>
             Delete
           </Button>
         </div>
@@ -21,7 +26,7 @@ const SavedList = ({ listName, listItems, handleDel }) => {
       <ListGroup.Item className='saved-list'>
         <div className='saved-list__heading' onClick={() => setShow(!show)}>
           {listName}
-          <Button variant='danger' onClick={() => handleDel(listName)}>
+          <Button variant='danger' onClick={() => delList(listName)}>
             Delete
           </Button>
         </div>
