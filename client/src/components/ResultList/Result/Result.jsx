@@ -25,8 +25,7 @@ const Result = ({ movie, setNom, noms }) => {
   return (
     <ListGroup.Item id='result'>
       <p className='info'>
-        Title: {movie.Title} <br />
-        Year: {movie.Year}
+        {movie.Title} ({movie.Year})
       </p>
       {btn()}
     </ListGroup.Item>
