@@ -1,0 +1,11 @@
+#nomination-list {
+  .ln-input {
+    padding: 1rem;
+  }
+  button:disabled {
+    pointer-events: none;
+  }
+  .btn-wrap {
+    display: inline-block;
+  }
+}
