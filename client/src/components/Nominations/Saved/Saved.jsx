@@ -3,7 +3,7 @@ import SavedList from './SavedList/SavedList'
 import ListGroup from 'react-bootstrap/ListGroup'
 
 const Saved = ({ saved, setSaved }) => {
-  const loadLocalStorage = () => {
+  useEffect(() => {
     if (localStorage.length) {
       const ll = Object.keys(localStorage).map(k => {
         return { [k]: JSON.parse(localStorage.getItem(k)) }
@@ -12,15 +12,8 @@ const Saved = ({ saved, setSaved }) => {
     } else {
       setSaved([])
     }
-  }
-  useEffect(() => {
-    loadLocalStorage()
   }, [setSaved])
 
-  const delList = key => {
-    localStorage.removeItem(key)
-    loadLocalStorage()
-  }
   return (
     <div id='saved'>
       <ListGroup variant='flush'>
@@ -29,9 +22,9 @@ const Saved = ({ saved, setSaved }) => {
             <SavedList
               listName={Object.keys(mList)}
               listItems={mList[Object.keys(mList)]}
-              handleDel={delList}
               key={Object.keys(mList)}
-              loadLocalStorage={loadLocalStorage}
+              saved={saved}
+              setSaved={setSaved}
             />
           ))}
       </ListGroup>

@@ -30,6 +30,17 @@ const App = () => {
     search.length && !results.length ? setLoading(true) : setLoading(false)
   }, [search, results])
 
+  useEffect(() => {
+    if (localStorage.length) {
+      const ll = Object.keys(localStorage).map(k => {
+        return { [k]: JSON.parse(localStorage.getItem(k)) }
+      })
+      setSaved(ll)
+    } else {
+      setSaved([])
+    }
+  }, [setSaved])
+
   return (
     // <Container id='App'>
     //   <Notification message={notif} />
@@ -64,27 +75,29 @@ const App = () => {
       <Nav
         variant='pills'
         defaultActiveKey='Search'
-        className='flex-column nav'
+        className='nav'
         onSelect={e => setSelected(e)}>
         <Nav.Item>Shoppies</Nav.Item>
         <Nav.Item>
           <Nav.Link eventKey='Search'>New List</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey='Saved'>Saved</Nav.Link>
+          <Nav.Link eventKey='Saved'>Saved({saved.length})</Nav.Link>
         </Nav.Item>
       </Nav>
 
       {selected === 'Search' ? (
         <Container fluid className='selected'>
           <Row>
+            <Search
+              setResults={setResults}
+              setLoading={setLoading}
+              search={search}
+              setSearch={setSearch}
+            />
+          </Row>
+          <Row>
             <Col>
-              <Search
-                setResults={setResults}
-                setLoading={setLoading}
-                search={search}
-                setSearch={setSearch}
-              />
               <ResultList
                 results={results}
                 search={search}
@@ -104,7 +117,7 @@ const App = () => {
           </Row>
         </Container>
       ) : (
-        <Container fluid>
+        <Container fluid className='selected'>
           <Saved saved={saved} setSaved={setSaved} />
         </Container>
       )}

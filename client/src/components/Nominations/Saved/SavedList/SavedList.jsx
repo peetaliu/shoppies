@@ -2,12 +2,19 @@ import React, { useState } from 'react'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 
-const SavedList = ({ listName, listItems, loadLocalStorage }) => {
+const SavedList = ({ listName, listItems, saved, setSaved }) => {
   const [show, setShow] = useState(false)
 
   const delList = key => {
     localStorage.removeItem(key)
-    loadLocalStorage()
+    if (localStorage.length) {
+      const ll = Object.keys(localStorage).map(k => {
+        return { [k]: JSON.parse(localStorage.getItem(k)) }
+      })
+      setSaved(ll)
+    } else {
+      setSaved([])
+    }
   }
 
   if (!show) {
