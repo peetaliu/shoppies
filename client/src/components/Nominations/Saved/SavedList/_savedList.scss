@@ -1,0 +1,20 @@
+.saved-list {
+  flex-direction: column;
+
+  &__heading {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .list-name {
+    width: 100%;
+    text-align: left;
+  }
+  &__item-group {
+    width: 100%;
+    &__item {
+      text-align: left;
+    }
+  }
+}
