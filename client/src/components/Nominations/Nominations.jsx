@@ -1,75 +1,48 @@
 import React, { useState, useEffect } from 'react'
-import ListGroup from 'react-bootstrap/ListGroup'
-import Button from 'react-bootstrap/Button'
-import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl'
+import List from './List/List'
+import Saved from './Saved/Saved'
+import Tabs from 'react-bootstrap/Tabs'
+import Tab from 'react-bootstrap/Tab'
 
 const Nominations = ({ nominations, setNominations }) => {
-  const [saved, setSaved] = useState({})
-  const [listName, setListName] = useState('')
+  const [display, setDisplay] = useState('home')
+  const [saved, setSaved] = useState([])
 
-  useEffect(() => {
+  const loadLocalStorage = () => {
     if (localStorage.length) {
-      setSaved({ ...localStorage })
+      const ll = Object.keys(localStorage).map(k => {
+        return { [k]: JSON.parse(localStorage.getItem(k)) }
+      })
+      setSaved(ll)
+    } else {
+      setSaved([])
     }
-  }, [])
-
-  const loadLists = () => {
-    const ll = Object.keys(localStorage).map(k => {
-      return { [k]: JSON.parse(localStorage.getItem(k)) }
-    })
-
-    return ll
   }
+  useEffect(() => {
+    loadLocalStorage()
+  }, [setSaved])
 
-  const saveList = () => {
-    localStorage.setItem(listName, JSON.stringify(nominations))
-    setSaved({ ...localStorage })
-    setListName('')
+  const delList = key => {
+    localStorage.removeItem(key)
+    loadLocalStorage()
   }
 
   return (
     <div id='nominations'>
       <h4>Nominations</h4>
-      <InputGroup className='mb-3'>
-        <FormControl
-          name='list'
-          id='list-name'
-          value={listName}
-          placeholder='List Name'
-          onChange={({ target }) => setListName(target.value)}
-        />
-        <InputGroup.Append>
-          {listName &&
-          nominations.length === 5 &&
-          !Object.keys(localStorage).includes(listName) ? (
-            <Button variant='primary' onClick={saveList}>
-              Save List
-            </Button>
-          ) : (
-            <Button variant='primary' disabled>
-              Save List
-            </Button>
-          )}
-        </InputGroup.Append>
-      </InputGroup>
-      <ListGroup variant='flush'>
-        {nominations.map(n => (
-          <ListGroup.Item key={n.Id} className='nom-item'>
-            <p>
-              Title: {n.Title} <br />
-              Year: {n.Year}
-            </p>
-            <Button
-              variant='primary'
-              onClick={() =>
-                setNominations(nominations.filter(nom => nom.Id !== n.Id))
-              }>
-              Remove Nomination
-            </Button>
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
+      <Tabs id='nom-tab' activeKey={display} onSelect={k => setDisplay(k)}>
+        <Tab eventKey='home' title='New List'>
+          <List
+            nominations={nominations}
+            setNominations={setNominations}
+            saved={saved}
+            setSaved={setSaved}
+          />
+        </Tab>
+        <Tab eventKey='saved' title='Saved Lists'>
+          <Saved saved={saved} handleDel={delList} />
+        </Tab>
+      </Tabs>
     </div>
   )
 }
