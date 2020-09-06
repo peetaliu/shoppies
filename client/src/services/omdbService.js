@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseURL = 'http://localhost:3001/api/movies'
+const baseURL = '/api/movies'
 
 const search = async sObj => {
   try {
