@@ -42,6 +42,7 @@ const Search = ({ setResults, setLoading, search, setSearch }) => {
           name='Search'
           onChange={({ target }) => setSearch(target.value)}
           id='search-bar'
+          placeholder='Enter a movie title'
         />
       </InputGroup>
     </div>
