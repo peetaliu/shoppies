@@ -28,7 +28,13 @@ const SavedList = ({ listName, listItems, handleDel }) => {
         <ListGroup variant='flush' className='saved-list__item-group'>
           {listItems.map(i => (
             <ListGroup.Item key={i.Id} className='saved-list__item'>
-              {i.Title} ({i.Year})
+              <a
+                href={`https://www.imdb.com/title/${i.Id}/`}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='imdb-Link'>
+                {i.Title} ({i.Year})
+              </a>
             </ListGroup.Item>
           ))}
         </ListGroup>
