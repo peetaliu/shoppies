@@ -40,18 +40,34 @@ omdbRouter.post('/', async (req, res) => {
   }
 })
 
+// omdbRouter.post('/populate', async (req, res) => {
+//   const ids = req.body.ids
+//   const resArr = await ids.map(async id => {
+//     const options = {
+//       method: 'GET',
+//       url: baseURL,
+//       params: { i: id },
+//     }
+//     const returnObj = await axios(options)
+//     return returnObj.data
+//   })
+//   res.json(await Promise.all(resArr))
+// })
+
+//Get detailed info of Movie specified by id
 omdbRouter.post('/populate', async (req, res) => {
-  const ids = req.body.ids
-  const resArr = await ids.map(async id => {
-    const options = {
-      method: 'GET',
-      url: baseURL,
-      params: { i: id },
-    }
-    const returnObj = await axios(options)
-    return returnObj.data
-  })
-  res.json(await Promise.all(resArr))
+  const id = req.body.id
+  const options = {
+    method: 'GET',
+    url: baseURL,
+    params: { i: id },
+  }
+  try {
+    const data = await axios(options)
+    res.json(data.data)
+  } catch (e) {
+    res.send(e)
+  }
 })
 
 module.exports = omdbRouter
