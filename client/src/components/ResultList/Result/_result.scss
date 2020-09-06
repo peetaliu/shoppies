@@ -1,16 +1,56 @@
 #result {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all 0.8s ease;
 
+  .row {
+    align-items: center;
+  }
   .info {
     text-align: left;
     font-size: 1em;
     margin: 0;
   }
+  .toggle {
+    float: left;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    border: none;
+    font-size: 1em;
+    text-decoration: none;
+    color: gray;
+
+    &:hover {
+      border-bottom: gray 1px solid;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .detailed {
+    transition: all 0.8s ease;
+  }
   .nom-btn {
     background-color: #44c767;
     border-radius: 3px;
     height: min-content;
+  }
+
+  .detailed {
+    margin-top: 1rem;
+    .movie-img {
+      max-width: 80%;
+      height: auto;
+    }
+  }
+  .imdb-Link {
+    font-size: $small-font-size;
+    &:hover {
+      border-bottom: #0056b3 1px solid;
+    }
   }
 }
