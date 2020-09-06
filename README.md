@@ -1,4 +1,4 @@
-# shoppies
+# Shoppies
 
 Shopify Web Developer Intern Challenge Project!
 
