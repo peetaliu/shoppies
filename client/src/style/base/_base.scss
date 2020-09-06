@@ -1,6 +1,7 @@
 body {
   background: $background-colour;
   text-align: center;
+  transition: all 0.8s ease;
 }
 
 .small-text {
@@ -9,4 +10,8 @@ body {
 
 .d-inline-block {
   display: inline-block;
+}
+
+.a-left {
+  text-align: left;
 }
