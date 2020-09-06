@@ -10,9 +10,9 @@ const search = async sObj => {
   }
 }
 
-const populate = async idsObj => {
+const populate = async id => {
   try {
-    const req = await axios.post(`${baseURL}/populate`, idsObj)
+    const req = await axios.post(`${baseURL}/populate`, { id: id })
     return req.data
   } catch (err) {
     console.log('Populate Error: ', err)
