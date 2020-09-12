@@ -1,6 +1,12 @@
 .saved-list {
   flex-direction: column;
 
+  :hover {
+    cursor: pointer;
+    background: rgb(207, 222, 255);
+    transition: ease-in all 0.1s;
+  }
+
   &__heading {
     width: 100%;
     display: flex;
@@ -20,8 +26,7 @@
 
   .imdb-Link {
     font-size: $small-font-size;
-    &:hover {
-      border-bottom: #0056b3 1px solid;
-    }
+    width: 100%;
+    height: 100%;
   }
 }
