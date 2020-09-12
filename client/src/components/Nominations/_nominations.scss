@@ -2,6 +2,7 @@
   background: white;
   padding: 2rem;
   min-height: 155px;
+  transition: ease-in all 0.1s;
   .nav {
     a {
       font-size: $small-font-size;
