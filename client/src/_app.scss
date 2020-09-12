@@ -1,4 +1,11 @@
 #App {
   height: 100vh;
   padding: 5em 0em;
+  margin: 0rem 10rem;
+  @include respond(tab-land) {
+    margin: 0rem 5rem;
+  }
+  @include respond(tab-port) {
+    margin: 0rem 2rem;
+  }
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Search from './components/Search/Search'
 import ResultList from './components/ResultList/ResultList'
 import Nominations from './components/Nominations/Nominations'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 
 const App = () => {
   const [search, setSearch] = useState('')
@@ -15,7 +15,7 @@ const App = () => {
   }, [search, results])
 
   return (
-    <Container id='App'>
+    <div id='App'>
       <h1 className='a-left'>The Shoppies</h1>
       <Row>
         <Search
@@ -42,7 +42,7 @@ const App = () => {
           />
         </Col>
       </Row>
-    </Container>
+    </div>
   )
 }
 
